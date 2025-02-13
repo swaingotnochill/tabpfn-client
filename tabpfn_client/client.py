@@ -855,3 +855,19 @@ class ServiceClient(Singleton):
             return True, token
 
         return False, "Browser login failed or was cancelled"
+
+    @classmethod
+    def get_api_usage(cls, access_token: str):
+        """
+        Retrieve current API usage data of the user from the server.
+        Returns summary: str
+        """
+        response = cls.httpx_client.post(
+            cls.server_endpoints.get_api_usage.path,
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+        cls._validate_response(response, "get_api_usage")
+
+        response = response.json()
+
+        return f"Currently, you have used {response['current_usage']} of the allowed limit of {'Unlimited' if int(response['usage_limit']) == -1 else response['usage_limit']} credits. The limit will reset at {response['reset_time']}."
