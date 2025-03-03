@@ -73,10 +73,11 @@ class TestTabPFNClassifierInit(unittest.TestCase):
         self.assertTrue(mock_prompt_and_set_token.called)
         y_pred = tabpfn.predict(self.X_test)
         self.assertTrue(np.all(mock_predict_response == y_pred))
-
-        self.assertIn(
-            "n_estimators%22%3A%2010",
-            str(predict_route.calls.last.request.url),
+        # Checking for both %20 and + enconding of spaces
+        # since httpx was inconsistent with its spacen encoding scheme
+        self.assertTrue(
+            "n_estimators%22%3A%2010" in str(predict_route.calls.last.request.url)
+            or "n_estimators%22%3A+10" in str(predict_route.calls.last.request.url),
             "check that n_estimators is passed to the server",
         )
 
