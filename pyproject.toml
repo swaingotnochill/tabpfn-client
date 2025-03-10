@@ -11,6 +11,7 @@ requires-python = ">=3.9,<=3.12"
 # (can be bypassed by installing with conda)
 dynamic = ["dependencies", "optional-dependencies"]
 
+description = "API access for TabPFN: Foundation model for tabular data"
 classifiers = [
   'Intended Audience :: Science/Research',
   'Intended Audience :: Developers',
