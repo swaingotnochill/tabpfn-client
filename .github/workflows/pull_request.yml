@@ -132,7 +132,7 @@ jobs:
 
       - name: Report cache status
         run: |
-          echo "Cache status: ${{ steps.pip-cache.outputs.cache-hit == 'true' ? 'HIT' : 'MISS' }}"
+          echo "Cache status: ${{ steps.pip-cache.outputs.cache-hit == 'true' && 'HIT' || 'MISS'}}"
           echo "Installation time: ${{ steps.install-deps.outputs.duration }} ms"
 
       - name: Run Tests
