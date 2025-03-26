@@ -196,9 +196,15 @@ Additionally, it is recommended that developers install the ruff extension in th
 git clone https://github.com/PriorLabs/tabpfn-client
 cd tabpfn-client
 git submodule update --init --recursive
-pip install -e ".[dev]"
 pip install -e .
 cd ..
+```
+
+NOTE: For development, you will need to download some additional dev dependencies.
+Use the below command to get it ready for development and running tests.
+
+```bash
+pip install -e ".[dev]"
 ```
 
 ### Build for PyPI
